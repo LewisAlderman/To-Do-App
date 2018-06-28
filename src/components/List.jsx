@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ListItem from "./ListItem";
 
 class List extends Component {
 	constructor(props) {
@@ -14,7 +15,7 @@ class List extends Component {
 				{
 					id: 2,
 					task: "edited task",
-					completed: true,
+					completed: false,
 				},
 				{
 					id: 3,
@@ -24,13 +25,14 @@ class List extends Component {
 				{
 					id: 4,
 					task: "wash car",
-					completed: true,
+					completed: false,
 				},
 			],
 			listItem: "",
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleClick = this.handleClick.bind(this);
+		this.handleCheck = this.handleCheck.bind(this);
 	}
 
 	handleChange(e) {
@@ -54,8 +56,19 @@ class List extends Component {
 		});
 	}
 
+	handleCheck(index) {
+		let { toDoArray } = this.state;
+		toDoArray[index].completed = !toDoArray[index].completed;
+		let newArr = toDoArray;
+
+		this.setState({
+			toDoArray: newArr,
+		});
+	}
+
 	render() {
 		const { toDoArray } = this.state;
+
 		return (
 			<React.Fragment>
 				<p>Add a task</p>
@@ -64,10 +77,13 @@ class List extends Component {
 				{!toDoArray.length ? (
 					<p>Not items here</p>
 				) : (
-					<ul>
-						{" "}
+					<ul className="list-group">
 						{this.state.toDoArray.map((item, index) => (
-							<li key={index}> {item.task} </li>
+							<ListItem
+								key={index}
+								item={item}
+								onChange={() => this.handleCheck(index)}
+							/>
 						))}
 					</ul>
 				)}
