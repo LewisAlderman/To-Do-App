@@ -33,6 +33,8 @@ class List extends Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.handleClick = this.handleClick.bind(this);
 		this.handleCheck = this.handleCheck.bind(this);
+		this.handleDelete = this.handleDelete.bind(this);
+		// this.handleEdit = this.handleEdit.bind(this);
 	}
 
 	handleChange(e) {
@@ -66,6 +68,16 @@ class List extends Component {
 		});
 	}
 
+	handleDelete(index) {
+		const copy = this.state.toDoArray;
+		copy.splice(index, 1);
+		this.setState({
+			toDoArray: copy,
+		});
+
+		// console.log("delete");
+	}
+
 	render() {
 		const { toDoArray } = this.state;
 
@@ -83,6 +95,8 @@ class List extends Component {
 								key={index}
 								item={item}
 								onChange={() => this.handleCheck(index)}
+								onClick={() => this.handleDelete(index)}
+								// onEdit={() => this.handleEdit}
 							/>
 						))}
 					</ul>
