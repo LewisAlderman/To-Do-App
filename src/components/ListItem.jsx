@@ -1,11 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
 
-const ListItem = ({ item, onChange, onClick }) => (
+const ListItem = ({ item, onChange }) => (
 	<li className="list-group-item">
 		<input type="checkbox" onChange={onChange} />
 		{item.task}
-		{/* <button onPress={onPress}>edit</button> */}
-		<button onClick={onClick}>delete</button>
+		<button>edit</button>
+		<button>delete</button>
 	</li>
 );
 export default ListItem;
